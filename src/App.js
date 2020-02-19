@@ -10,70 +10,100 @@ const stateMachine = {
     awaitingUpload: { on: { next: 'ready' } },
     ready: { on: { next: 'classifying' }, showImage: true },
     classifying: { on: { next: 'complete' } },
-    complete: { on: { next: 'awaitingUpload' }, showImage: true }
+    complete: { on: { next: 'awaitingUpload' },
+                showImage: true,
+                showPredictions: true }
   }
 }
+
+const formatPredictions = ({ className, probability }) => (
+  // Mutiply probality by 100 and fix it to 2 decimal places
+  <li key={className}>
+    {`${className}: %${(probability * 100).toFixed(2)}`}
+  </li>
+)
 
 const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
 
 function App() {
-  // app state reducer
+  // App state reducer
   const [state, dispatch] = useReducer(reducer, stateMachine.initial);
 
-  // dispatch function
+  // Dispatch function
   const next = () => dispatch('next');
 
-  // model local state, default null
+  // Model local state, default null
   const [model,setModel] = useState(null);
 
-  // image url local state, default null
+  // Image url local state, default null
   const [imageUrl,setImageUrl] = useState(null);
 
-  // file input ref
+  // Predictions local state, default empty array
+  const [predictions,setPredictions] = useState([]);
+
+  // File input ref
   const inputRef = useRef();
 
-  // image element ref
+  // Image element ref
   const imageRef = useRef();
 
-  // load image classifier model
+  // Load image classifier model
   const loadModel = async () => {
-    // trigger state transition from initial to loadingModel state
+    // Trigger state transition from initial to loadingModel state
     next();
-    // load model
+    // Load model
     const mobilenetModel = await mobilenet.load();
-    // set model to state
+    // Set model to state
     setModel(mobilenetModel);
-    // trigger state transition from loadingModel state to awaitingUpload state
+    // Trigger state transition from loadingModel state to awaitingUpload state
     next();
   }
 
-  // handle image upload
+  // Handle image upload
   const handleImageUpload = e => {
     const { files } = e.target;
     
     if (files.length > 0) {
-      // take the first file and get it's url
+      // Take the first file and get it's url
       const url = URL.createObjectURL(files[0]);
       setImageUrl(url);
-      // transition from awaitingupload state to ready state
+      // Trigger state transition from awaitingupload state to ready state
       next()
     }
+  }
+
+  const idetifyImage = async () => {
+    // Trigger state transition from ready state to classifying state
+    next()
+    // Classify the image.
+    const classificationResults = await model.classify(imageRef.current);
+    setPredictions(classificationResults);
+    // Trigger state transition from classifying state to complete state
+    next()
+  }
+
+  const reset = () => {
+    setPredictions([]);
+    setImageUrl(null);
+    // Trigger state transition from complete state to awaitingUpload state
+    next()
   }
 
   const buttonProps = {
     initial: { text: 'Load Model', action: loadModel },
     loadingModel: { text: 'Loading Model...', action: () => { }  },
     awaitingUpload: { text: 'Upload Photo', action: () => inputRef.current.click  },
-    ready: { text: 'Identify', action: () => { }  },
+    ready: { text: 'Identify', action: idetifyImage  },
     classifying: { text: 'Identifying...', action: () => { }  },
-    complete: { text: 'Reset', action: () => { }  }
+    complete: { text: 'Reset', action: reset  }
   }
 
-  const { showImage = false } = stateMachine.states[state];
+  const { showImage = false, showPredictions = false } = stateMachine.states[state];
 
   return (
     <div>
       {showImage && <img alt="upload-preview" src={imageUrl} ref={imageRef} />}
+      {showPredictions && <ul>{predictions.map(formatPredictions)}</ul>}
       <input
         type="file"
         accept="image/*"
