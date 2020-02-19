@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/animal-breed-classifier/static/css/main.1d1af5da.chunk.css",
+    "main.js": "/animal-breed-classifier/static/js/main.44ce8a49.chunk.js",
+    "main.js.map": "/animal-breed-classifier/static/js/main.44ce8a49.chunk.js.map",
+    "runtime-main.js": "/animal-breed-classifier/static/js/runtime-main.8761ce1e.js",
+    "runtime-main.js.map": "/animal-breed-classifier/static/js/runtime-main.8761ce1e.js.map",
+    "static/js/2.aa25f496.chunk.js": "/animal-breed-classifier/static/js/2.aa25f496.chunk.js",
+    "static/js/2.aa25f496.chunk.js.map": "/animal-breed-classifier/static/js/2.aa25f496.chunk.js.map",
+    "index.html": "/animal-breed-classifier/index.html",
+    "precache-manifest.af69097aca22948f456c72f7646701d8.js": "/animal-breed-classifier/precache-manifest.af69097aca22948f456c72f7646701d8.js",
+    "service-worker.js": "/animal-breed-classifier/service-worker.js",
+    "static/css/main.1d1af5da.chunk.css.map": "/animal-breed-classifier/static/css/main.1d1af5da.chunk.css.map",
+    "static/js/2.aa25f496.chunk.js.LICENSE.txt": "/animal-breed-classifier/static/js/2.aa25f496.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8761ce1e.js",
+    "static/js/2.aa25f496.chunk.js",
+    "static/css/main.1d1af5da.chunk.css",
+    "static/js/main.44ce8a49.chunk.js"
+  ]
+}
