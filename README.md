@@ -42,7 +42,7 @@ For example, an algorithm has been trained with thousands of images to create an
 
 Good example is here: https://zvs9k.sse.codesandbox.io/
 
-### 3. Training A Model In The Browser
+##### 3. Training A Model In The Browser
 ---
 The last feature is to define, train and run a model entirely in the browser.
 
