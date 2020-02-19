@@ -16,9 +16,9 @@ The output of training a machine-learning algorithm with a dataset. It’s a bit
 ---
 Labels and features relate to the data that you feed an algorithm in the training process.
 
-A label represents how you would classify each entry in your dataset and how you would label it. For example, if our dataset was a CSV file describing different animals, our labels could be words like “dog” or “snake” (depending on what each animal represents).
+For example, if our dataset was a CSV file describing different animals, our labels could be words like “dog” or “snake” (depending on what each animal represents).
 
-Features on the other hand, are the characteristics of each entry in your data set. For our animals example, it could be things like “playful, barks”, “reptile, rampant”, and so on.
+Features on the other hand, are the characteristics of each entry in your data set. For our animals example, “playful, barks”, “reptile, rampant”, and so on.
 
 Using this, a machine-learning algorithm will be able to find some correlation between features and their label that it will use for future predictions.
 
@@ -32,7 +32,7 @@ Using this, a machine-learning algorithm will be able to find some correlation b
 ---
 Depending on the problem you are trying to solve, there might be a model already trained with a specific data set and for a specific purpose which you can leverage and import in your code.
 
-For example, let’s say we are building an app to predict if an image is a picture of a cat. We could then use a popular image classification model is called MobileNet and is available as a pre-trained model with Tensorflow.js.
+For example, let’s say we are building an app to predict if an image is a picture of a cat. We could then use a popular image classification model called MobileNet which is available as a pre-trained model with Tensorflow.js.
 
 ##### 2. Transfer learning
 ---
@@ -46,6 +46,6 @@ Good example is here: https://zvs9k.sse.codesandbox.io/
 ---
 The last feature is to define, train and run a model entirely in the browser.
 
-Here data is splitted into a training set and a test set. The reason for this is that we’re going to use our training set to train our algorithm and our test set to check the accuracy of our predictions, to validate if our model is ready to be used or needs to be tweaked.
+Here data is splitted into a training set and a test set. The training set is used to train the algorithm and the test set is used to check the accuracy of our predictions.
 
 Good example is here: https://ktncm.codesandbox.io/
