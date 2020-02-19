@@ -8,9 +8,9 @@ const stateMachine = {
     initial: { on: { next: 'loadingModel' } },
     loadingModel: { on: { next: 'awaitingUpload' } },
     awaitingUpload: { on: { next: 'ready' } },
-    ready: { on: { next: 'classifying' } },
+    ready: { on: { next: 'classifying' }, showImage: true },
     classifying: { on: { next: 'complete' } },
-    complete: { on: { next: 'awaitingUpload' } }
+    complete: { on: { next: 'awaitingUpload' }, showImage: true }
   }
 }
 
@@ -29,8 +29,11 @@ function App() {
   // image url local state, default null
   const [imageUrl,setImageUrl] = useState(null);
 
-  // image input ref
+  // file input ref
   const inputRef = useRef();
+
+  // image element ref
+  const imageRef = useRef();
 
   // load image classifier model
   const loadModel = async () => {
@@ -60,14 +63,17 @@ function App() {
   const buttonProps = {
     initial: { text: 'Load Model', action: loadModel },
     loadingModel: { text: 'Loading Model...', action: () => { }  },
-    awaitingUpload: { text: 'Upload Photo', action: () => { }  },
+    awaitingUpload: { text: 'Upload Photo', action: () => inputRef.current.click  },
     ready: { text: 'Identify', action: () => { }  },
     classifying: { text: 'Identifying...', action: () => { }  },
     complete: { text: 'Reset', action: () => { }  }
   }
 
+  const { showImage = false } = stateMachine.states[state];
+
   return (
     <div>
+      {showImage && <img alt="upload-preview" src={imageUrl} ref={imageRef} />}
       <input
         type="file"
         accept="image/*"
