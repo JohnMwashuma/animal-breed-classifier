@@ -1,8 +1,16 @@
+## Getting started
+
+```sh
+yarn
+
+yarn start
+```
+
 ## Basic Tensorflow.js terminologies
 
 ### What is a Model?
 ----
-When you train a machine-learning algorithm with a dataset, the model is the output of this training process. It’s a bit like a function that takes new data as input and produces a prediction as output.
+The output of training a machine-learning algorithm with a dataset. It’s a bit like a function that takes new data as input and produces a prediction as output.
 
 #### What are Labels And Features?
 ---
