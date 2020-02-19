@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import './App.css';
 
 const stateMachine = {
@@ -13,9 +13,13 @@ const stateMachine = {
   }
 }
 
+const reducer = (currentState, event) => stateMachine.states[currentState].on[event] || stateMachine.initial;
+
 function App() {
+  const [state, dispatch] = useReducer(reducer, stateMachine.initial);
   return (
     <div>
+      <button onClick={() => dispatch('next')}>{state}</button>
     </div>
   );
 }
